@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="mxl2" default="makejar" basedir=".">
+
+    <property name="src" location="src/" />
+    <property name="build" location="build/" />
+
+	<target name="init" description="create build directory">
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="compile" depends="init" description="compile *.java sources">
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false">
+			<exclude name="mxl2/site/**" />
+			<classpath> 
+				<!-- <pathelement path="${classpath}"/>
+	            <fileset dir="${destdir}">
+					<include name="**/*.jar"/>
+                </fileset>
+                <fileset dir="${libdir}">
+	                <include name="**/*.jar"/>
+                </fileset>
+                <fileset file="${servlet-api}" />
+                 -->
+            </classpath>
+			<!--                    <include name="*.java" />-->
+        </javac>
+    </target>
+
+	<target name="makejar" depends="compile">
+		<jar jarfile="lib/mxl2.jar" basedir="${build}" includes="**/*.class" excludes="test*/**" />
+	</target>
+
+</project>
